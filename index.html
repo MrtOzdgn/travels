@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mert Özdoğan — Travels</title>
+  <meta name="description" content="City and landscape photography from Mert Özdoğan's travels around Europe." />
+
+  <meta property="og:title" content="Mert Özdoğan — Travels" />
+  <meta property="og:description" content="City and landscape photography from around Europe, filterable by city." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="top">
+    <a class="brand" href="#top">Mert Özdoğan <span>— Travels</span></a>
+    <nav class="nav">
+      <a href="https://mrtozdgn.github.io/mertozdogan.github.io-/">Portfolio ↗</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== City filter ===== -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <!-- more pills are generated automatically from data-city values found on the page -->
+    </div>
+
+    <!-- ===== Gallery (one flat set, filterable by city) ===== -->
+    <section class="gallery-section" id="work">
+      <div class="masonry" id="masonry">
+        <!-- INTAKE:gallery -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Contact / Footer ===== -->
+  <footer class="contact" id="contact">
+    <a class="email" href="mailto:mert.ismk@gmail.com">mert.ismk@gmail.com</a>
+    <p class="copyright">© <span id="year"></span> Mert Özdoğan. All rights reserved.</p>
+  </footer>
+
+  <!-- ===== Lightbox ===== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" aria-label="Close">×</button>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <img class="lb-img" src="" alt="" />
+    <button class="lb-next" aria-label="Next">›</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
