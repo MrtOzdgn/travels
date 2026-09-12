@@ -1,0 +1,10 @@
+# Working folders — originals and staging state, never published.
+# Mirrors the main portfolio's layout, where these live outside the
+# published repo entirely; kept inside travels/ here for convenience,
+# excluded from git for the same reason: originals include faces
+# (yours and friends') that this site is explicitly not meant to publish.
+/incoming/
+/archive/
+/currently-live/
+/.travel/
+.DS_Store
