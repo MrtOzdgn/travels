@@ -36,7 +36,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   function applyFilter(filter) {
     figures.forEach((f) => {
-      f.hidden = filter !== "all" && f.dataset.city !== filter;
+      // "All" means all places, not cars: cars only ever show under the Cars pill.
+      f.hidden = filter === "all" ? f.dataset.city === "cars" : f.dataset.city !== filter;
     });
     [bar, carBar].forEach((container) => {
       container.querySelectorAll(".filter-pill").forEach((p) => {
