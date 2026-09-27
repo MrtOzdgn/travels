@@ -1,14 +1,21 @@
 // Current year in footer
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// ===== City filter =====
+// ===== Filters: place (city) and category (cars) =====
 // Pills are generated from whatever data-city values are actually on the page,
-// so adding a new city via the intake tool needs no HTML changes here.
+// so adding a new city or the "cars" category via the intake tool needs no HTML
+// changes here. "cars" is kept in its own bar/button, separate from places: a car
+// photo is reachable only via the Cars pill, never via a city pill, even if it
+// was shot in a city that also has its own place pill.
 (function () {
   const bar = document.getElementById("filterBar");
+  const carBar = document.getElementById("filterBarCars");
   const figures = Array.from(document.querySelectorAll(".print"));
 
-  const cities = Array.from(new Set(figures.map((f) => f.dataset.city))).sort();
+  const allTags = Array.from(new Set(figures.map((f) => f.dataset.city))).sort();
+  const cities = allTags.filter((tag) => tag !== "cars");
+  const hasCars = allTags.includes("cars");
+
   cities.forEach((city) => {
     const label = city.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
     const btn = document.createElement("button");
@@ -18,19 +25,32 @@ document.getElementById("year").textContent = new Date().getFullYear();
     bar.appendChild(btn);
   });
 
+  carBar.hidden = !hasCars;
+  if (hasCars) {
+    const btn = document.createElement("button");
+    btn.className = "filter-pill";
+    btn.dataset.filter = "cars";
+    btn.textContent = "Cars";
+    carBar.appendChild(btn);
+  }
+
   function applyFilter(filter) {
     figures.forEach((f) => {
       f.hidden = filter !== "all" && f.dataset.city !== filter;
     });
-    bar.querySelectorAll(".filter-pill").forEach((p) => {
-      p.classList.toggle("active", p.dataset.filter === filter);
+    [bar, carBar].forEach((container) => {
+      container.querySelectorAll(".filter-pill").forEach((p) => {
+        p.classList.toggle("active", p.dataset.filter === filter);
+      });
     });
   }
 
-  bar.addEventListener("click", (e) => {
-    const btn = e.target.closest(".filter-pill");
-    if (!btn) return;
-    applyFilter(btn.dataset.filter);
+  [bar, carBar].forEach((container) => {
+    container.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-pill");
+      if (!btn) return;
+      applyFilter(btn.dataset.filter);
+    });
   });
 })();
 
