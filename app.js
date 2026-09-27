@@ -1,16 +1,18 @@
 // Current year in footer
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// ===== Filters: place (city) and category (cars) =====
-// Pills are generated from whatever data-city values are actually on the page,
-// so adding a new city or the "cars" category via the intake tool needs no HTML
-// changes here. "cars" is kept in its own bar/button, separate from places: a car
-// photo is reachable only via the Cars pill, never via a city pill, even if it
-// was shot in a city that also has its own place pill.
+// ===== Filters (place + cars) + Masonry + Lightbox =====
+// One shared "figures" array, in source order, drives everything: which
+// pills exist, which photos are visible, how they're laid out, and the
+// lightbox's next/prev sequence. That keeps "reading order" consistent
+// everywhere: left to right, then top to bottom, always matching each
+// filter's own rank order — never "whichever column it happened to land
+// in," which is what plain CSS column-count masonry would do.
 (function () {
   const bar = document.getElementById("filterBar");
   const carBar = document.getElementById("filterBarCars");
-  const figures = Array.from(document.querySelectorAll(".print"));
+  const masonry = document.getElementById("masonry");
+  const figures = Array.from(masonry.querySelectorAll(".print"));
 
   const allTags = Array.from(new Set(figures.map((f) => f.dataset.city))).sort();
   const cities = allTags.filter((tag) => tag !== "cars");
@@ -34,6 +36,24 @@ document.getElementById("year").textContent = new Date().getFullYear();
     carBar.appendChild(btn);
   }
 
+  function columnCountFor(width) {
+    if (width <= 560) return 1;
+    if (width <= 900) return 2;
+    return 3;
+  }
+
+  // Round-robin only the currently-visible figures across N columns, in
+  // their relative source order, so every filter view reads left to right
+  // in rank order with no gaps left by hidden photos.
+  function layoutMasonry() {
+    const visible = figures.filter((f) => !f.hidden);
+    const n = columnCountFor(window.innerWidth);
+    const cols = Array.from({ length: n }, () => document.createElement("div"));
+    cols.forEach((col) => (col.className = "masonry-col"));
+    visible.forEach((fig, i) => cols[i % n].appendChild(fig));
+    masonry.replaceChildren(...cols);
+  }
+
   function applyFilter(filter) {
     figures.forEach((f) => {
       // "All" means all places, not cars: cars only ever show under the Cars pill.
@@ -44,6 +64,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
         p.classList.toggle("active", p.dataset.filter === filter);
       });
     });
+    layoutMasonry();
   }
 
   [bar, carBar].forEach((container) => {
@@ -53,10 +74,15 @@ document.getElementById("year").textContent = new Date().getFullYear();
       applyFilter(btn.dataset.filter);
     });
   });
-})();
 
-// ===== Lightbox =====
-(function () {
+  applyFilter("all");
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layoutMasonry, 150);
+  });
+
+  // ----- Lightbox -----
   const lb = document.getElementById("lightbox");
   const lbImg = lb.querySelector(".lb-img");
   const btnClose = lb.querySelector(".lb-close");
@@ -66,12 +92,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
   let visible = [];
   let index = -1;
 
-  // Recomputed on every open so the lightbox only ever cycles through
-  // whatever the current city filter is showing.
+  // Recomputed on every open, from the master list (not a DOM query), so
+  // it always reflects the current filter's own rank order.
   function visibleImgs() {
-    return Array.from(document.querySelectorAll("img.shot")).filter(
-      (el) => !el.closest(".print").hidden
-    );
+    return figures.filter((f) => !f.hidden).map((f) => f.querySelector("img.shot"));
   }
 
   function show(i) {
@@ -96,9 +120,10 @@ document.getElementById("year").textContent = new Date().getFullYear();
     lbImg.src = "";
   }
 
-  document.querySelectorAll("img.shot").forEach((el) =>
-    el.addEventListener("click", () => open(el))
-  );
+  figures.forEach((f) => {
+    const el = f.querySelector("img.shot");
+    el.addEventListener("click", () => open(el));
+  });
 
   btnClose.addEventListener("click", close);
   btnNext.addEventListener("click", (e) => { e.stopPropagation(); show(index + 1); });

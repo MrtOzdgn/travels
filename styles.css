@@ -103,14 +103,16 @@ img { display: block; max-width: 100%; }
   padding: 20px 32px 30px;
 }
 
-/* ===== Masonry (CSS columns) of instax-style prints ===== */
-.masonry { column-count: 3; column-gap: var(--gap); }
-@media (max-width: 900px) { .masonry { column-count: 2; } }
-@media (max-width: 560px) { .masonry { column-count: 1; } }
+/* ===== Masonry of instax-style prints =====
+   JS-driven (see app.js): visible figures are distributed round-robin
+   across column divs in document order, so reading order (left to right,
+   then top to bottom) always matches the current filter's rank order,
+   regardless of each photo's height. Native CSS column-count instead
+   fills one column fully before moving to the next, which breaks that. */
+.masonry { display: flex; align-items: flex-start; gap: var(--gap); }
+.masonry-col { display: flex; flex-direction: column; gap: var(--gap); flex: 1 1 0; min-width: 0; }
 
 .print {
-  break-inside: avoid;
-  margin-bottom: var(--gap);
   background: var(--card);
   padding: 12px 12px 0;
   border-radius: 6px;
