@@ -7,6 +7,9 @@ technically sharp, place-driven shots, filterable by city. No personal or
 people-focused photos; that's what the main portfolio's Street/Documentary
 work already covers.
 
+**Working on this repo as an agent? Read [AGENTS.md](AGENTS.md) first.** It is
+the full brief for both sites.
+
 ## Selection criteria
 
 - **Place-driven** — documents where Mert has actually been: landmarks,
