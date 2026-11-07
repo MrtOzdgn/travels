@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 61 place photos + 6 cars |
+| Size | 19 photos | 61 place photos + 8 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -134,11 +134,11 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 5, Brussels 1, Cars 6.
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 5, Brussels 1, Cars 8.
 
 **Order.** Each city's best and most representative photo comes first. The "All"
 view follows page order, which runs in city blocks: Ghent, Leuven, cars 1-5, Brussels,
-Brugge, Antwerp, car 6. Add a new city as a new block before the
+Brugge, Antwerp, cars 6-8. Add a new city as a new block before the
 `<!-- INTAKE:gallery -->` marker.
 
 **Mert's explicit decisions:**
