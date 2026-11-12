@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 62 place photos + 8 cars |
+| Size | 19 photos | 73 place photos + 13 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -134,18 +134,18 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 6, Brussels 1, Cars 8.
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 5, Cars 13.
 
 **Order.** Each city's best and most representative photo comes first. The "All"
 view follows page order, which runs in city blocks: Ghent, Leuven, cars 1-5, Brussels,
-Brugge, Antwerp, cars 6-8. Add a new city as a new block before the
+Brugge, Antwerp, cars 6-13, Istanbul. Add a new city as a new block before the
 `<!-- INTAKE:gallery -->` marker.
 
 **Mert's explicit decisions:**
 
 - Ghent: `man-in-yellow-blazer` stays last, because it blocks the scenic photos.
 - Antwerp: `chinatown-gate-tram` leads, followed by the central station frames.
-- Brussels: only `equestrian-statue-blue`. He deleted the two Grand Place photos.
+- Brussels: `equestrian-statue-blue` leads. He deleted the two Grand Place photos, so don't re-add Grand Place shots.
 - Bruges: the beer-sign gable was removed.
 
 **Cars are a special case:**
