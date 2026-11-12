@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 110 place photos + 13 cars |
+| Size | 16 photos | 109 place photos + 11 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -100,22 +100,24 @@ reintroduce a fixed order unless he asks.
 **Rank list:**
 
 ```
-01 man-on-bench-bw                  08 night-motorcyclist        15 fishermen-galata-bridge
-02 smoking-fisherman-galata-bridge  09 highway-sunset-overpass   16 golden-sunset-rocks
-03 tuxedo-man-crowd-bruges-bw       10 stormy-beach-mountains    17 ginger-cat-istanbul
-04 boat-silhouette-bw               11 cappadocia-blue-rock      18 accordion-player-ghent
-05 pipe-smoking-cyclist-bruges      12 bluehour-highway-skyline  19 graffiti-alley-radial-drag-ghent
-06 abbey-doorway-canon-bw           13 cappadocia-ridge-hiker
-07 hand-reaching-horse-bridle-bw    14 cappadocia-valley-road
+01 man-on-bench-bw                  07 hand-reaching-horse-bridle-bw  13 cappadocia-valley-road
+02 smoking-fisherman-galata-bridge  08 night-motorcyclist             14 golden-sunset-rocks
+03 tuxedo-man-crowd-bruges-bw       09 highway-sunset-overpass        15 accordion-player-ghent
+04 boat-silhouette-bw               10 stormy-beach-mountains         16 graffiti-alley-radial-drag-ghent
+05 pipe-smoking-cyclist-bruges      11 cappadocia-blue-rock
+06 abbey-doorway-canon-bw           12 cappadocia-ridge-hiker
 ```
 
 Removed from main in Nov 2026 at Mert's request (don't re-add): the Anıtkabir honour
 guards (still on Travels, Ankara), the racehorse with the red jockey, and the grey
-racehorse in the red-and-yellow hood (also removed from Travels, Ankara).
+racehorse in the red-and-yellow hood (also removed from Travels, Ankara). Also cut in
+Nov 2026 as weaker than their neighbours: the fishermen on the Galata Bridge (also cut
+from Travels), the blue-hour highway (repeated the highway-sunset idea) and the ginger
+cat (kept on Travels).
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
 cyclist, the accordion player and the smoking fisherman: each has one clear human anchor you can read at a
-glance. The weaker end is the fishermen, the ginger cat and the night motorcyclist.
+glance. The weaker end is now the night motorcyclist and the sunset rocks.
 Slot numbers don't track this exactly, because the order also balances genre. Use
 these frames as the comparison when you judge whether something is "on par".
 
@@ -144,8 +146,8 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 13, Leuven 7, Brussels 4, Istanbul 18, Ankara 7,
-Cappadocia 12, Antalya 7, Izmir 1, Cars 13.
+**Current counts:** Ghent 23, Brugge 18, Antwerp 13, Leuven 7, Brussels 4, Istanbul 17, Ankara 7,
+Cappadocia 12, Antalya 7, Izmir 1, Cars 11.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
 load, because Mert didn't like any hand-picked arrangement. The order of `<figure>`
@@ -166,7 +168,11 @@ reintroduce a fixed order unless he asks.
 - Ankara: the Anıtkabir flag over the skyline was removed (not well executed).
 - Antalya: the marble statue among the ruins was removed.
 - Antwerp: the black-and-white church tower was removed.
-- Cars: no taxis. Two Istanbul taxis were removed; the third (looking through a taxi
+- Istanbul: the fishermen on the Galata Bridge were removed. Keep both ginger cats.
+- Cars: no taxis. The two Japan showroom cars were removed (low-quality WhatsApp copies);
+  no Japan photos for now. The Mercedes (07) was re-exported without its black band.
+- Statues in Brugge and Antwerp: a lot of them, but Mert doesn't want a blanket cut.
+  Discuss before removing any. Two Istanbul taxis were removed; the third (looking through a taxi
   window toward Serasker Caddesi) moved to Istanbul as a place photo.
 
 **Cars are a special case:**
@@ -176,8 +182,7 @@ reintroduce a fixed order unless he asks.
 - Cars appear only under the separate Cars button. They're excluded from "All" and
   from every city filter. `app.js` handles this from the tag.
 - The `.citytag` label shows the real city where the car was shot, such as `Brugge`.
-  Don't guess it. Ask Mert if you don't know. Two Japan showroom cars are tagged
-  `Japan` because only the country is known. Cars never go on the map, so a car from a
+  Don't guess it. Ask Mert if you don't know. Cars never go on the map, so a car from a
   new country needs no map change.
 
 **City pills generate automatically** from `data-city` values, so a new city needs no
@@ -361,8 +366,9 @@ After pushing, also confirm:
 Don't fix these without Mert's OK:
 
 1. **Broken link preview on the main portfolio:** `og:image` points to
-   `images/large/01-ginger-cat-istanbul.jpg`, which no longer exists. The file is now
-   `17-ginger-cat-istanbul.jpg`. Open Graph images also generally need an absolute URL.
+   `images/large/01-ginger-cat-istanbul.jpg`, which no longer exists (the cat was cut
+   from main). Pick a current photo with Mert. Open Graph images also generally need an
+   absolute URL.
 2. **GIF dimensions:** `14-tower-lamppost-animation.gif` declares its thumbnail size
    (600x900) rather than its large size (1067x1600). The ratio is the same, so it
    displays correctly.

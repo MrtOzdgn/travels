@@ -26,7 +26,7 @@ window.TravelsMap = (function () {
     antwerp: "02-antwerpen-centraal-facade",
     leuven: "04-university-library-tower",
     brussels: "03-manneken-pis",
-    istanbul: "12-galata-bridge-new-mosque",
+    istanbul: "11-galata-bridge-new-mosque",
     ankara: "05-highway-sunset-overpass",
     cappadocia: "08-valley-sunset",
     antalya: "01-stormy-beach-mountains",
