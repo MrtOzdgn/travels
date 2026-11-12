@@ -16,7 +16,7 @@ or in a commit message (see rule 2).
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
 | Size | 21 photos | 116 place photos + 14 cars |
-| Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
+| Layout | One flat gallery, best first, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
 root. There is no build step: a push to `main` is a publish, usually live within a
@@ -140,16 +140,15 @@ city well over adequate snapshots. Candid strangers are fine, personal photos ar
 **Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 19, Ankara 9,
 Cappadocia 12, Antalya 8, Izmir 1, Cars 14.
 
-**Order.** Each city's best and most representative photo comes first. The "All"
-view follows page order, which runs in city blocks: Ghent, Leuven, cars 1-5, Brussels,
-Brugge, Antwerp, cars 6-14, Istanbul, Ankara, Cappadocia, Antalya, Izmir. Add a new city as a new block before the
-`<!-- INTAKE:gallery -->` marker.
+**Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
+load, because Mert didn't like any hand-picked arrangement. The order of `<figure>`
+lines in `index.html` no longer affects what visitors see, so just keep each city's
+photos together and add a new city before the `<!-- INTAKE:gallery -->` marker. Don't
+reintroduce a fixed order unless he asks.
 
 **Mert's explicit decisions:**
 
-- Ghent: `man-in-yellow-blazer` stays last, because it blocks the scenic photos.
-- Antwerp: `chinatown-gate-tram` leads, followed by the central station frames.
-- Brussels: `equestrian-statue-blue` leads. He deleted the two Grand Place photos, so don't re-add Grand Place shots.
+- Brussels: he deleted the two Grand Place photos, so don't re-add Grand Place shots.
 - Bruges: the beer-sign gable was removed.
 - Leuven: the abbey beer bottles photo was removed.
 
@@ -280,8 +279,8 @@ After pushing, also confirm:
 
 - The live page shows the new photo and the expected count.
 - `git status` is clean, and only the files you meant to change were committed.
-- The gallery still reads left to right, and on Travels the Cars and city filters still
-  behave as section 6 describes.
+- The main gallery still reads left to right in rank order. On Travels the order
+  is random per load, and the Cars and city filters still behave as section 6 describes.
 - If a page looks out of date, it may be browser cache. Hard-refresh before debugging.
 
 ## 10. How Mert works

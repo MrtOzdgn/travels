@@ -2,7 +2,7 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ===== Filters (place + cars) + Masonry + Lightbox =====
-// One shared "figures" array, in source order, drives everything: which
+// One shared "figures" array, shuffled on load, drives everything: which
 // pills exist, which photos are visible, how they're laid out, and the
 // lightbox's next/prev sequence. That keeps "reading order" consistent
 // everywhere: left to right, then top to bottom, always matching each
@@ -13,6 +13,14 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const carBar = document.getElementById("filterBarCars");
   const masonry = document.getElementById("masonry");
   const figures = Array.from(masonry.querySelectorAll(".print"));
+
+  // Shuffle once per page load (Fisher–Yates), so every visit shows a fresh
+  // order. Layout, filters and the lightbox all read this same array, so they
+  // stay consistent with each other within a visit.
+  for (let i = figures.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [figures[i], figures[j]] = [figures[j], figures[i]];
+  }
 
   const allTags = Array.from(new Set(figures.map((f) => f.dataset.city))).sort();
   const cities = allTags.filter((tag) => tag !== "cars");
