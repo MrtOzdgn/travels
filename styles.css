@@ -109,15 +109,22 @@ img { display: block; max-width: 100%; }
    then top to bottom) always matches the current filter's rank order,
    regardless of each photo's height. Native CSS column-count instead
    fills one column fully before moving to the next, which breaks that. */
-.masonry { display: flex; align-items: flex-start; gap: var(--gap); }
-.masonry-col { display: flex; flex-direction: column; gap: var(--gap); flex: 1 1 0; min-width: 0; }
+/* Justified rows: app.js sizes each row so its photos share one height and fill
+   the width exactly, reading left to right, then the next row. */
+.masonry { display: flex; flex-direction: column; gap: var(--gap); }
+.gal-row { display: flex; align-items: stretch; gap: var(--gap); }
+.gal-row .print { flex: 0 0 auto; min-width: 0; }
+
+@media (hover: hover) {
+  .masonry:has(.print:hover) .print:not(:hover) { opacity: .8; }
+}
 
 .print {
   background: var(--card);
   padding: 12px 12px 0;
   border-radius: 6px;
   box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 22px rgba(60,50,30,.10);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease, opacity .35s ease;
 }
 .print[hidden] { display: none; }
 .print:hover {
@@ -177,46 +184,9 @@ img { display: block; max-width: 100%; }
   color: #a89f8f;
 }
 
-/* ===== Lightbox ===== */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(20,17,12,.94);
-  padding: 4vh 4vw;
-}
-.lightbox.open { display: flex; }
-.lb-img {
-  max-width: 100%;
-  max-height: 92vh;
-  object-fit: contain;
-  box-shadow: 0 10px 60px rgba(0,0,0,.5);
-  animation: fade .25s ease;
-  border-radius: 2px;
-}
-@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-.lb-close, .lb-prev, .lb-next {
-  position: absolute;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  opacity: .75;
-  transition: opacity .2s;
-  user-select: none;
-}
-.lb-close:hover, .lb-prev:hover, .lb-next:hover { opacity: 1; }
-.lb-close { top: 18px; right: 26px; font-size: 2.4rem; line-height: 1; }
-.lb-prev, .lb-next { top: 50%; transform: translateY(-50%); font-size: 3.5rem; padding: 0 22px; }
-.lb-prev { left: 6px; }
-.lb-next { right: 6px; }
 @media (max-width: 560px) {
   .site-header { padding: 14px 18px; }
   .brand { font-size: 1.05rem; }
   .filter-bar { padding: 84px 16px 0; }
   .gallery-section { padding: 16px 16px 20px; }
-  .lb-prev, .lb-next { font-size: 2.4rem; padding: 0 10px; }
 }

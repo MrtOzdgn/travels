@@ -13,7 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261112b" />
+  <link rel="stylesheet" href="lightbox.css?v=20261112b" />
 </head>
 <body>
 
@@ -231,13 +232,20 @@
   </footer>
 
   <!-- ===== Lightbox ===== -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lb-close" aria-label="Close">×</button>
-    <button class="lb-prev" aria-label="Previous">‹</button>
-    <img class="lb-img" src="" alt="" />
-    <button class="lb-next" aria-label="Next">›</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <div class="lb-backdrop"></div>
+    <div class="lb-stage"><img class="lb-img" alt="" draggable="false" /></div>
+    <div class="lb-top lb-chrome">
+      <span class="lb-count"></span>
+      <button class="lb-btn lb-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <button class="lb-btn lb-nav lb-prev lb-chrome" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="lb-btn lb-nav lb-next lb-chrome" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="lb-caption lb-chrome" aria-live="polite"></div>
   </div>
 
-  <script src="app.js?v=20261112"></script>
+  <script src="gallery.js?v=20261112b"></script>
+  <script src="lightbox.js?v=20261112b"></script>
+  <script src="app.js?v=20261112b"></script>
 </body>
 </html>

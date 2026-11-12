@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 22 photos | 116 place photos + 14 cars |
+| Size | 20 photos | 116 place photos + 14 cars |
 | Layout | One flat gallery in random order, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -100,15 +100,17 @@ reintroduce a fixed order unless he asks.
 **Rank list:**
 
 ```
-01 man-on-bench-bw                  08 racehorse-red-jockey      15 grey-racehorse-hood
-02 smoking-fisherman-galata-bridge  09 hand-reaching-horse-bridle-bw 16 cappadocia-ridge-hiker
-03 tuxedo-man-crowd-bruges-bw       10 night-motorcyclist        17 cappadocia-valley-road
-04 anitkabir-honour-guards          11 highway-sunset-overpass   18 fishermen-galata-bridge
-05 boat-silhouette-bw               12 stormy-beach-mountains    19 golden-sunset-rocks
-06 pipe-smoking-cyclist-bruges      13 cappadocia-blue-rock      20 ginger-cat-istanbul
-07 abbey-doorway-canon-bw           14 bluehour-highway-skyline  21 accordion-player-ghent
-                                                                 22 graffiti-alley-radial-drag-ghent
+01 man-on-bench-bw                  08 night-motorcyclist        15 cappadocia-valley-road
+02 smoking-fisherman-galata-bridge  09 highway-sunset-overpass   16 fishermen-galata-bridge
+03 tuxedo-man-crowd-bruges-bw       10 stormy-beach-mountains    17 golden-sunset-rocks
+04 boat-silhouette-bw               11 cappadocia-blue-rock      18 ginger-cat-istanbul
+05 pipe-smoking-cyclist-bruges      12 bluehour-highway-skyline  19 accordion-player-ghent
+06 abbey-doorway-canon-bw           13 grey-racehorse-hood       20 graffiti-alley-radial-drag-ghent
+07 hand-reaching-horse-bridle-bw    14 cappadocia-ridge-hiker
 ```
+
+Removed from main in Nov 2026 at Mert's request (don't re-add): the Anıtkabir honour
+guards (still on Travels, Ankara) and the racehorse with the red jockey.
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
 cyclist, the accordion player and the smoking fisherman: each has one clear human anchor you can read at a
@@ -238,10 +240,22 @@ renumbering it and everything between its old and new positions:
    that file is affected.
 3. Reorder the `<figure>` lines to match.
 
-**Layout: do not switch to CSS columns.** `app.js` deals the figures into columns
-round-robin (1 column up to 560px, 2 up to 900px, otherwise 3), so the gallery reads
-**left to right**. CSS `column-count` fills top to bottom and was deliberately replaced.
-The lightbox follows the same shuffled master order.
+**Layout: justified rows, shared code.** Both sites load three shared files that must
+stay identical in both repos (check with `cmp`):
+
+- `gallery.js` lays the visible figures out in rows that read **left to right**, then
+  the next row. Every photo in a row has the same height and each row fills the width
+  (target heights: 420px wide screens, 360px up to 1300px, 300px up to 900px; phones
+  get one photo per row). Mert rejected column masonry (Nov 2026) because the columns
+  ended at different heights. Don't go back to columns.
+- `lightbox.js` + `lightbox.css` are the photo viewer: it grows out of the clicked photo
+  and shrinks back on close; swipe or arrows step through, swipe down closes; click or
+  double-tap zooms to full size, drag to pan, pinch zooms; a counter and the EXIF/city
+  caption; neighbours preload; each open photo gets a `#slug` link and the back button
+  closes it. It follows the same shuffled master order as the grid.
+
+The `<script>`/`<link>` tags carry a `?v=` stamp. Bump it when you change these files so
+visitors don't get a cached copy.
 
 **Commit.** Stage specific files and write a plain message such as `Add Antwerp night
 street to Travels`. Keep private details out of commit messages. Never commit

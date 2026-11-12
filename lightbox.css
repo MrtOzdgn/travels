@@ -1,0 +1,126 @@
+/* ===== Lightbox ===== */
+/* Shared by the main portfolio and Travels (keep both copies identical). */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  visibility: hidden;
+  pointer-events: none;
+}
+.lightbox.open { visibility: visible; pointer-events: auto; }
+
+.lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 15, 11, .96);
+}
+
+.lb-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.lb-img {
+  position: absolute;
+  max-width: none;
+  transform-origin: 0 0;
+  will-change: transform;
+  border-radius: 2px;
+  box-shadow: 0 18px 70px rgba(0, 0, 0, .55);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  cursor: zoom-in;
+  background: #1d1914;
+}
+.lightbox.zoomed .lb-img { cursor: grab; box-shadow: none; }
+.lightbox.zoomed .lb-img:active { cursor: grabbing; }
+
+/* Controls: fade in after the photo opens, out while zoomed or dragging. */
+.lb-chrome {
+  position: absolute;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+.lightbox.open .lb-chrome { animation: lb-chrome-in .45s ease .12s backwards; }
+.lightbox.zoomed .lb-chrome,
+.lightbox.ui-hidden .lb-chrome,
+.lightbox.closing .lb-chrome { opacity: 0; pointer-events: none; }
+.lightbox.zoomed .lb-top { opacity: 1; pointer-events: auto; }
+.lightbox.zoomed .lb-count { opacity: 0; }
+@keyframes lb-chrome-in { from { opacity: 0; } to { opacity: 1; } }
+
+.lb-top {
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px 0 24px;
+  pointer-events: none;
+}
+.lb-top > * { pointer-events: auto; }
+
+.lb-count {
+  font-family: "Space Mono", monospace;
+  font-size: .74rem;
+  letter-spacing: .08em;
+  color: rgba(255, 255, 255, .6);
+  transition: opacity .3s ease;
+}
+
+.lb-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .07);
+  color: rgba(255, 255, 255, .85);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.lb-btn svg { width: 20px; height: 20px; }
+.lb-btn:hover { background: rgba(255, 255, 255, .16); color: #fff; }
+.lb-btn:focus-visible { outline: 2px solid var(--accent, #c98a3a); outline-offset: 2px; }
+
+.lb-nav { top: 50%; margin-top: -26px; width: 52px; height: 52px; }
+.lb-nav svg { width: 24px; height: 24px; }
+.lb-prev { left: 18px; }
+.lb-next { right: 18px; }
+.lb-prev:hover { transform: translateX(-2px); }
+.lb-next:hover { transform: translateX(2px); }
+.lightbox.single .lb-nav { display: none; }
+
+.lb-caption {
+  left: 0; right: 0; bottom: 0;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: .72rem;
+  letter-spacing: .02em;
+  color: rgba(255, 255, 255, .62);
+  white-space: pre-wrap;
+  pointer-events: none;
+}
+
+/* Touch screens: swipe replaces the side arrows. */
+@media (hover: none) {
+  .lb-nav { display: none; }
+}
+@media (max-width: 560px) {
+  .lb-top { padding: 0 8px 0 16px; }
+  .lb-caption { font-size: .66rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox.open .lb-chrome { animation: none; }
+}
