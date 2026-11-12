@@ -17,6 +17,22 @@ window.TravelsMap = (function () {
     istanbul: [28.9784, 41.0082], ankara: [32.8597, 39.9334], cappadocia: [34.829, 38.6431],
     antalya: [30.7133, 36.8969], izmir: [27.1428, 38.4237],
   };
+  // The photo shown when hovering a city pin: an iconic scene, chosen by Mert
+  // (Nov 2026). File name without extension, inside images/<city>/. Ask him
+  // before changing one, and add one for every new city.
+  const COVER = {
+    ghent: "02-belfry-rooftop-panorama",
+    brugge: "01-rozenhoedkaai-canal-flowers",
+    antwerp: "02-antwerpen-centraal-facade",
+    leuven: "06-university-library-tower",
+    brussels: "03-manneken-pis",
+    istanbul: "13-galata-bridge-new-mosque",
+    ankara: "07-highway-sunset-overpass",
+    cappadocia: "08-valley-sunset",
+    antalya: "01-stormy-beach-mountains",
+    izmir: "01-boat-silhouette-bw",
+  };
+
   // Which side of the pin each label sits on, so close neighbours don't overlap
   // and edge cities don't get clipped on narrow screens. Default: right.
   const LABEL_SIDE = {
@@ -72,12 +88,25 @@ window.TravelsMap = (function () {
 
     svg = d3.select(svgEl);
     gLand = svg.append("g").attr("class", "land-layer");
-    zoom = d3.zoom().filter(() => false).on("zoom", (e) => {
-      transform = e.transform;
-      gLand.attr("transform", transform);
-      placeOverlays();
-    });
-    svg.call(zoom);
+    // Drag to pan, scroll / pinch to zoom. Double-click is left to the countries.
+    zoom = d3.zoom()
+      .scaleExtent([0.8, 80])
+      .filter((e) => (!e.ctrlKey || e.type === "wheel") && !e.button && e.type !== "dblclick")
+      .on("start", (e) => { if (e.sourceEvent) frame.classList.add("dragging"); })
+      .on("end", () => frame.classList.remove("dragging"))
+      .on("zoom", (e) => {
+        transform = e.transform;
+        gLand.attr("transform", transform);
+        // Zoomed in by hand: show every city pin, hide the country badges.
+        frame.classList.toggle("near", transform.k >= 3);
+        placeOverlays();
+      });
+    svg.call(zoom).on("dblclick.zoom", null);
+
+    // Zoom buttons and "back to start"
+    frame.querySelector(".map-zoom-in").addEventListener("click", () => svg.transition().duration(350).call(zoom.scaleBy, 1.7));
+    frame.querySelector(".map-zoom-out").addEventListener("click", () => svg.transition().duration(350).call(zoom.scaleBy, 1 / 1.7));
+    frame.querySelector(".map-home").addEventListener("click", () => showEurope());
 
     gLand.selectAll("path")
       .data(features)
@@ -134,10 +163,13 @@ window.TravelsMap = (function () {
   function project() {
     const W = frame.clientWidth, H = frame.clientHeight;
     svg.attr("viewBox", `0 0 ${W} ${H}`);
-    const box = { type: "MultiPoint", coordinates: [[-10, 34.5], [45, 35], [-10, 60], [45, 58], [16, 63]] };
-    projection = d3.geoAzimuthalEqualArea().rotate([-18, -48]).clipAngle(90)
-      .fitExtent([[16, 16], [W - 16, H - 16]], box);
+    // Starting frame: from Belgium to eastern Türkiye, with a little room around.
+    const box = { type: "MultiPoint", coordinates: [[-1, 35.5], [45.5, 36], [-1, 54.5], [44, 52.5], [22, 56]] };
+    projection = d3.geoAzimuthalEqualArea().rotate([-22, -46]).clipAngle(90)
+      .fitExtent([[24, 24], [W - 24, H - 24]], box);
     path = d3.geoPath(projection);
+    // Keep at least part of the map in view while panning.
+    zoom.translateExtent([[-W * 0.6, -H * 0.6], [W * 1.6, H * 1.6]]);
     gLand.selectAll("path").attr("d", path);
     if (!focus) svg.call(zoom.transform, d3.zoomIdentity);
     placeOverlays();
@@ -190,12 +222,18 @@ window.TravelsMap = (function () {
     else closeDeck();
   });
 
+  // Must match .deck's width in map.css: clamp(460px, 48%, 960px).
+  function panelWidth() {
+    const W = frame.clientWidth;
+    return Math.min(W, Math.max(460, Math.min(W * 0.48, 960)));
+  }
+
   // Room the open panel takes from the map, so the country can sit beside it.
   function deckShift() {
     if (!openCity) return { x: 0, y: 0 };
     const W = frame.clientWidth, H = frame.clientHeight;
     if (isSheet()) return { x: 0, y: -(H * 0.62) / 2 };
-    return { x: -Math.min(460, W) / 2, y: 0 };
+    return { x: -panelWidth() / 2, y: 0 };
   }
 
   // instant: true = jump, "slide" = short move beside the panel, false = full zoom
@@ -242,7 +280,9 @@ window.TravelsMap = (function () {
   let previewEl = null;
   function showPreview(pin, c) {
     hidePreview();
-    const t = cityFigs(c)[0].querySelector("img.shot");
+    const figs = cityFigs(c);
+    const cover = figs.find((f) => f.querySelector("img.shot").getAttribute("src").includes("/" + COVER[c] + "."));
+    const t = (cover || figs[0]).querySelector("img.shot");
     previewEl = document.createElement("div");
     previewEl.className = "pin-preview";
     previewEl.innerHTML = `<img src="${t.getAttribute("src")}" alt="">`;
@@ -253,6 +293,9 @@ window.TravelsMap = (function () {
   // ----- City panel -----
   function openDeck(c) {
     if (openCity === c && deckEl) return;
+    // A pin reached by panning/zooming by hand may belong to another country.
+    const k = Object.keys(COUNTRIES).find((x) => COUNTRIES[x].cities.includes(c));
+    if (k && k !== focus) focusCountry(k);
     closeDeck(true);
     hidePreview();
     openCity = c;
@@ -279,7 +322,7 @@ window.TravelsMap = (function () {
     frame.appendChild(deckEl);
 
     const grid = deckEl.querySelector(".deck-grid");
-    Gallery.layout(grid, figs, { target: isSheet() ? 130 : 150, pad: isSheet() ? 14 : 24 });
+    Gallery.layout(grid, figs, isSheet() ? { target: 130, pad: 14 } : { target: panelWidth() > 700 ? 230 : 170 });
     enableSwipeToClose();
 
     deckEl.animate(

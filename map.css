@@ -60,7 +60,35 @@
   background: #e7e3d8;
   box-shadow: inset 0 0 0 1px var(--line), 0 8px 26px rgba(60,50,30,.08);
 }
-.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+.map-frame.dragging .map-svg { cursor: grabbing; }
+.map-frame.dragging .pin, .map-frame.dragging .country-label { transition: none; }
+
+/* Zoomed in by hand: every city pin shows, country badges step aside */
+.map-frame.near .country-label { opacity: 0; pointer-events: none; }
+.map-frame.near .pin { opacity: 1; pointer-events: auto; }
+.map-frame.near.deck-open .pin:not(.active) { opacity: .35; }
+
+/* Zoom + back-to-start controls */
+.map-controls {
+  position: absolute; top: 16px; right: 16px; z-index: 4;
+  display: flex; flex-direction: column;
+  background: rgba(255,253,249,.96);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(60,50,30,.14);
+  overflow: hidden;
+}
+.map-controls button {
+  display: grid; place-items: center;
+  width: 40px; height: 40px;
+  border: none; background: none; color: var(--ink);
+  cursor: pointer;
+  transition: background .2s;
+}
+.map-controls button + button { border-top: 1px solid var(--line); }
+.map-controls button:hover { background: #f1eadb; }
+.map-controls svg { width: 18px; height: 18px; }
+.map-frame.deck-open:not(.sheet) .map-controls { right: calc(clamp(460px, 48%, 960px) + 16px); }
 
 .land {
   fill: #f7f3ea;
@@ -204,7 +232,8 @@
 .deck {
   position: absolute; z-index: 5;
   top: 0; right: 0; bottom: 0;
-  width: min(460px, 100%);
+  width: clamp(460px, 48%, 960px); /* keep in sync with panelWidth() in map.js */
+  max-width: 100%;
   display: flex; flex-direction: column;
   background: rgba(250,247,240,.98);
   box-shadow: -10px 0 30px rgba(60,50,30,.14);
@@ -240,7 +269,13 @@
 .deck .print .meta { justify-content: flex-end; padding: 9px 2px 11px; }
 .map-frame.deck-open .map-cities { opacity: 0; pointer-events: none; }
 
+@media (hover: none) {
+  .map-zoom-in, .map-zoom-out { display: none; }
+  .map-controls button + button { border-top: none; }
+}
 @media (max-width: 700px) {
+  .map-frame.deck-open .map-controls { right: 10px; }
+  .map-controls { top: 10px; right: 10px; }
   .deck {
     top: auto; left: 0; right: 0; bottom: 0;
     width: auto; height: 62%;
