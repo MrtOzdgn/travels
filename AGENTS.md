@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 20 photos | 73 place photos + 13 cars |
+| Size | 21 photos | 73 place photos + 13 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -94,13 +94,13 @@ pleasant, well-exposed shot. "Nice photo" is a rejection.
 **Current order.** The first rows matter most:
 
 ```
-01 man-on-bench-bw                  08 racehorse-red-jockey      15 cappadocia-ridge-hiker
-02 tuxedo-man-crowd-bruges-bw       09 night-motorcyclist        16 cappadocia-valley-road
-03 boat-silhouette-bw               10 highway-sunset-overpass   17 fishermen-galata-bridge
-04 abbey-doorway-canon-bw           11 stormy-beach-mountains    18 golden-sunset-rocks
-05 pipe-smoking-cyclist-bruges      12 cappadocia-blue-rock      19 ginger-cat-istanbul
-06 hand-reaching-horse-bridle-bw    13 bluehour-highway-skyline  20 accordion-player-ghent
-07 smoking-fisherman-galata-bridge  14 grey-racehorse-hood
+01 man-on-bench-bw                  08 anitkabir-honour-guards   15 grey-racehorse-hood
+02 tuxedo-man-crowd-bruges-bw       09 racehorse-red-jockey      16 cappadocia-ridge-hiker
+03 boat-silhouette-bw               10 night-motorcyclist        17 cappadocia-valley-road
+04 abbey-doorway-canon-bw           11 highway-sunset-overpass   18 fishermen-galata-bridge
+05 pipe-smoking-cyclist-bruges      12 stormy-beach-mountains    19 golden-sunset-rocks
+06 hand-reaching-horse-bridle-bw    13 cappadocia-blue-rock      20 ginger-cat-istanbul
+07 smoking-fisherman-galata-bridge  14 bluehour-highway-skyline  21 accordion-player-ghent
 ```
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
