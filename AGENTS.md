@@ -16,7 +16,7 @@ or in a commit message (see rule 2).
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
 | Size | 21 photos | 116 place photos + 14 cars |
-| Layout | One flat gallery, best first, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
+| Layout | One flat gallery in random order, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
 root. There is no build step: a push to `main` is a publish, usually live within a
@@ -92,7 +92,12 @@ pleasant, well-exposed shot. "Nice photo" is a rejection.
   really on par?". Answer by comparing against the specific live frames it would sit
   next to, and change your verdict if the comparison doesn't hold up.
 
-**Current order.** The first rows matter most:
+**Order.** Random. Since November 2026 `app.js` shuffles the main gallery on every
+page load too, at Mert's request. The `NN` slots below are kept as a rank list (useful
+for judging "on par"), but they no longer control what visitors see first. Don't
+reintroduce a fixed order unless he asks.
+
+**Rank list:**
 
 ```
 01 man-on-bench-bw                  08 racehorse-red-jockey      15 grey-racehorse-hood
@@ -112,11 +117,9 @@ these frames as the comparison when you judge whether something is "on par".
 
 **Mert's explicit decisions:**
 
-- The page leads with black-and-white street and documentary work, but the first
-  three rows alternate B&W and colour (Nov 2026: he found an all-B&W opening too
-  monotone). He rejected a pure merit order that put the motorcycle and racehorse
-  at the top.
-- He picks the final order. Propose a slot, but expect him to move it.
+- Display order is random per load (Nov 2026). Earlier fixed-order decisions (B&W
+  lead, alternating B&W and colour in the first rows) are superseded.
+- New photos still get the next `NN` slot; he can re-rank if he wants.
 
 **Worked examples:**
 
@@ -224,8 +227,8 @@ two-digit rank. Main portfolio paths are `images/{large,thumbs}/`. Travels paths
 - A `.gif` is allowed (`ghent/14-tower-lamppost-animation.gif`). Its figure simply
   references that filename.
 
-**Reordering.** Display order comes from the order of `<figure>` lines in `index.html`.
-On the main portfolio the `NN` prefix must match that order, so moving a photo means
+**Re-ranking.** The live display is shuffled, but the `<figure>` lines in `index.html`
+stay in `NN` order. If Mert re-ranks, the `NN` prefix must match, so moving a photo means
 renumbering it and everything between its old and new positions:
 
 1. Rename in **two phases** so names don't collide: every affected file to a temporary
@@ -236,8 +239,8 @@ renumbering it and everything between its old and new positions:
 
 **Layout: do not switch to CSS columns.** `app.js` deals the figures into columns
 round-robin (1 column up to 560px, 2 up to 900px, otherwise 3), so the gallery reads
-**left to right**. CSS `column-count` fills top to bottom, which scrambled the merit
-order and was deliberately replaced. The lightbox follows the same master order.
+**left to right**. CSS `column-count` fills top to bottom and was deliberately replaced.
+The lightbox follows the same shuffled master order.
 
 **Commit.** Stage specific files and write a plain message such as `Add Antwerp night
 street to Travels`. Keep private details out of commit messages. Never commit
@@ -279,8 +282,8 @@ After pushing, also confirm:
 
 - The live page shows the new photo and the expected count.
 - `git status` is clean, and only the files you meant to change were committed.
-- The main gallery still reads left to right in rank order. On Travels the order
-  is random per load, and the Cars and city filters still behave as section 6 describes.
+- Both galleries are random per load and read left to right. On Travels the Cars
+  and city filters still behave as section 6 describes.
 - If a page looks out of date, it may be browser cache. Hard-refresh before debugging.
 
 ## 10. How Mert works
