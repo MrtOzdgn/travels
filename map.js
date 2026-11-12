@@ -82,6 +82,13 @@ window.TravelsMap = (function () {
     if (frame.scrollTop || frame.scrollLeft) { frame.scrollTop = 0; frame.scrollLeft = 0; }
   });
 
+  // Scrolling over the map zooms the map and never scrolls the page, including at
+  // the zoom limits (where d3 stops calling preventDefault) and over the pins and
+  // labels that sit on top of the map. The city panel keeps its own scrolling.
+  frame.addEventListener("wheel", (e) => {
+    if (!e.target.closest(".deck")) e.preventDefault();
+  }, { passive: false });
+
   // ----- Build -----
   async function build() {
     try {
