@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 73 place photos + 13 cars |
+| Size | 20 photos | 73 place photos + 13 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -94,17 +94,17 @@ pleasant, well-exposed shot. "Nice photo" is a rejection.
 **Current order.** The first rows matter most:
 
 ```
-01 man-on-bench-bw                  08 night-motorcyclist        15 cappadocia-valley-road
-02 tuxedo-man-crowd-bruges-bw       09 highway-sunset-overpass   16 fishermen-galata-bridge
-03 boat-silhouette-bw               10 stormy-beach-mountains    17 golden-sunset-rocks
-04 abbey-doorway-canon-bw           11 cappadocia-blue-rock      18 ginger-cat-istanbul
-05 pipe-smoking-cyclist-bruges      12 bluehour-highway-skyline  19 accordion-player-ghent
-06 hand-reaching-horse-bridle-bw    13 grey-racehorse-hood
-07 racehorse-red-jockey             14 cappadocia-ridge-hiker
+01 man-on-bench-bw                  08 racehorse-red-jockey      15 cappadocia-ridge-hiker
+02 tuxedo-man-crowd-bruges-bw       09 night-motorcyclist        16 cappadocia-valley-road
+03 boat-silhouette-bw               10 highway-sunset-overpass   17 fishermen-galata-bridge
+04 abbey-doorway-canon-bw           11 stormy-beach-mountains    18 golden-sunset-rocks
+05 pipe-smoking-cyclist-bruges      12 cappadocia-blue-rock      19 ginger-cat-istanbul
+06 hand-reaching-horse-bridle-bw    13 bluehour-highway-skyline  20 accordion-player-ghent
+07 smoking-fisherman-galata-bridge  14 grey-racehorse-hood
 ```
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
-cyclist and the accordion player: each has one clear human anchor you can read at a
+cyclist, the accordion player and the smoking fisherman: each has one clear human anchor you can read at a
 glance. The weaker end is the fishermen, the ginger cat and the night motorcyclist.
 Slot numbers don't track this exactly, because the order also balances genre. Use
 these frames as the comparison when you judge whether something is "on par".
