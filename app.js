@@ -40,7 +40,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
     btn.className = "filter-pill cars-pill";
     btn.dataset.filter = "cars";
     btn.innerHTML =
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 16V12l2-5h10l2 5v4M5 16h14M5 16v2.5M19 16v2.5M4 12h16"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg>Cars';
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 16V12l2-5h10l2 5v4M5 16h14M5 16v2.5M19 16v2.5M4 12h16"/><circle cx="8" cy="14" r=".8" fill="currentColor"/><circle cx="16" cy="14" r=".8" fill="currentColor"/></svg>Automotive';
     carBar.appendChild(btn);
   }
 

@@ -177,8 +177,9 @@ reintroduce a fixed order unless he asks.
 **City pills generate automatically** from `data-city` values, so a new city needs no
 filter code. **But a new city must be added to the map** (see below).
 
-**Views (Nov 2026).** The top bar has a **Grid | Map** switch with the **Cars** button
-beside it (Mert didn't want Cars among the city pills). **Map is the landing view.**
+**Views (Nov 2026).** The top bar has a **Grid | Map** switch with the Cars button
+beside it (Mert didn't want Cars among the city pills). The button is labelled
+**Automotive**; internally the tag stays `cars` and the folder `images/car/`. **Map is the landing view.**
 
 - `map.js` + `map.css` (Travels only): a Europe map; Belgium and Türkiye are
   highlighted. Click a country to zoom in and see city pins with photo counts; click a
