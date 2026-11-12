@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 16 photos | 109 place photos + 11 cars |
+| Size | 16 photos | 104 place photos + 11 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -146,7 +146,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 13, Leuven 7, Brussels 4, Istanbul 17, Ankara 7,
+**Current counts:** Ghent 22, Brugge 16, Antwerp 11, Leuven 7, Brussels 4, Istanbul 17, Ankara 7,
 Cappadocia 12, Antalya 7, Izmir 1, Cars 11.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
@@ -171,8 +171,10 @@ reintroduce a fixed order unless he asks.
 - Istanbul: the fishermen on the Galata Bridge were removed. Keep both ginger cats.
 - Cars: no taxis. The two Japan showroom cars were removed (low-quality WhatsApp copies);
   no Japan photos for now. The Mercedes (07) was re-exported without its black band.
-- Statues in Brugge and Antwerp: a lot of them, but Mert doesn't want a blanket cut.
-  Discuss before removing any. Two Istanbul taxis were removed; the third (looking through a taxi
+- Statues: Mert doesn't want a blanket cut; statues are part of these cities. In Nov 2026
+  he approved trimming repeats only: Brugge's B&W Madonna and the bust, Antwerp's crowned
+  statue and the gold figure against the teal sky, and Ghent's B&W Artevelde (the colour
+  one stays). Discuss before removing any more. Two Istanbul taxis were removed; the third (looking through a taxi
   window toward Serasker Caddesi) moved to Istanbul as a place photo.
 
 **Cars are a special case:**
@@ -277,7 +279,7 @@ two-digit rank. Main portfolio paths are `images/{large,thumbs}/`. Travels paths
   can't read them, ask Mert. Unknown fields render as `ƒ/—`, `—`, `ISO —`, `—`.
 - **Never remove `<!-- INTAKE:gallery -->`** from either `index.html`. Mert's local
   scripts need it to insert photos.
-- A `.gif` is allowed (`ghent/14-tower-lamppost-animation.gif`). Its figure simply
+- A `.gif` is allowed (`ghent/13-tower-lamppost-animation.gif`). Its figure simply
   references that filename.
 
 **Re-ranking.** The live display is shuffled, but the `<figure>` lines in `index.html`
@@ -343,7 +345,7 @@ print("\n".join(problems) or "OK")
 ```
 
 Expected result: `OK` on the main portfolio. On Travels, one `wrong width/height`
-warning for `14-tower-lamppost-animation.gif` is known and harmless (section 11).
+warning for `13-tower-lamppost-animation.gif` is known and harmless (section 11).
 
 After pushing, also confirm:
 
@@ -369,7 +371,7 @@ Don't fix these without Mert's OK:
    `images/large/01-ginger-cat-istanbul.jpg`, which no longer exists (the cat was cut
    from main). Pick a current photo with Mert. Open Graph images also generally need an
    absolute URL.
-2. **GIF dimensions:** `14-tower-lamppost-animation.gif` declares its thumbnail size
+2. **GIF dimensions:** `13-tower-lamppost-animation.gif` declares its thumbnail size
    (600x900) rather than its large size (1067x1600). The ratio is the same, so it
    displays correctly.
 3. **Stale README sections:** the main `README.md` still describes the old sectioned
