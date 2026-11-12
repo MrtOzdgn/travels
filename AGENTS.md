@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 21 photos | 114 place photos + 14 cars |
+| Size | 21 photos | 117 place photos + 14 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -95,13 +95,13 @@ pleasant, well-exposed shot. "Nice photo" is a rejection.
 **Current order.** The first rows matter most:
 
 ```
-01 man-on-bench-bw                  08 anitkabir-honour-guards   15 grey-racehorse-hood
-02 tuxedo-man-crowd-bruges-bw       09 racehorse-red-jockey      16 cappadocia-ridge-hiker
-03 boat-silhouette-bw               10 night-motorcyclist        17 cappadocia-valley-road
-04 abbey-doorway-canon-bw           11 highway-sunset-overpass   18 fishermen-galata-bridge
-05 pipe-smoking-cyclist-bruges      12 stormy-beach-mountains    19 golden-sunset-rocks
-06 hand-reaching-horse-bridle-bw    13 cappadocia-blue-rock      20 ginger-cat-istanbul
-07 smoking-fisherman-galata-bridge  14 bluehour-highway-skyline  21 accordion-player-ghent
+01 man-on-bench-bw                  08 racehorse-red-jockey      15 grey-racehorse-hood
+02 smoking-fisherman-galata-bridge  09 hand-reaching-horse-bridle-bw 16 cappadocia-ridge-hiker
+03 tuxedo-man-crowd-bruges-bw       10 night-motorcyclist        17 cappadocia-valley-road
+04 anitkabir-honour-guards          11 highway-sunset-overpass   18 fishermen-galata-bridge
+05 boat-silhouette-bw               12 stormy-beach-mountains    19 golden-sunset-rocks
+06 pipe-smoking-cyclist-bruges      13 cappadocia-blue-rock      20 ginger-cat-istanbul
+07 abbey-doorway-canon-bw           14 bluehour-highway-skyline  21 accordion-player-ghent
 ```
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
@@ -112,8 +112,10 @@ these frames as the comparison when you judge whether something is "on par".
 
 **Mert's explicit decisions:**
 
-- The page leads with black-and-white street and documentary work. He rejected a
-  pure merit order that put the motorcycle and racehorse at the top.
+- The page leads with black-and-white street and documentary work, but the first
+  three rows alternate B&W and colour (Nov 2026: he found an all-B&W opening too
+  monotone). He rejected a pure merit order that put the motorcycle and racehorse
+  at the top.
 - He picks the final order. Propose a slot, but expect him to move it.
 
 **Worked examples:**
@@ -135,7 +137,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 16, Ankara 9,
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 19, Ankara 9,
 Cappadocia 12, Antalya 8, Izmir 1, Cars 14.
 
 **Order.** Each city's best and most representative photo comes first. The "All"
