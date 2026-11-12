@@ -23,8 +23,8 @@ the full brief for both sites.
   brief, prefer the shots that are sharp, well-composed, and actually
   represent the city well over merely-adequate snapshots. When a photo is
   genuinely portfolio-tier (a real decisive moment, not just "a nice photo
-  of a place"), it goes to the **main portfolio instead** — a photo lives
-  on one site, never both.
+  of a place"), it also belongs on the **main portfolio**. A photo can
+  appear on both sites.
 - **Cars are the one exception** — the Car category isn't curated for
   merit at all; every car photo goes in, regardless of how it stacks up
   against the rest. It's tagged with its real city at the bottom but kept

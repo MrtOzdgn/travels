@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 21 photos | 73 place photos + 13 cars |
+| Size | 21 photos | 114 place photos + 14 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -36,8 +36,9 @@ minute or two.
    If someone in a photo could be a relative, reject the frame and ask him.
 4. **No posed photos of friends or family, on either site.** Candid strangers are
    fine. If you can't tell a stranger from someone he knows, ask.
-5. **A photo lives on one site only.** If a Travels photo is promoted to the main
-   portfolio, remove it from Travels in the same piece of work.
+5. **A photo may appear on both sites.** Mert dropped the one-site rule in November
+   2026: a main-portfolio photo that shows a place can also go on Travels, and many
+   Turkish main photos now do. Each site still judges it by its own bar.
 6. **Removed means removed.** Never restore a photo from git history, and don't
    re-add anything listed in section 5 under "Mert's explicit decisions".
 7. **Client and event work never goes on either site.** It is handled separately
@@ -134,11 +135,12 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 5, Cars 13.
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 16, Ankara 9,
+Cappadocia 12, Antalya 8, Izmir 1, Cars 14.
 
 **Order.** Each city's best and most representative photo comes first. The "All"
 view follows page order, which runs in city blocks: Ghent, Leuven, cars 1-5, Brussels,
-Brugge, Antwerp, cars 6-13, Istanbul. Add a new city as a new block before the
+Brugge, Antwerp, cars 6-14, Istanbul, Ankara, Cappadocia, Antalya, Izmir. Add a new city as a new block before the
 `<!-- INTAKE:gallery -->` marker.
 
 **Mert's explicit decisions:**
