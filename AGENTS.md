@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 21 photos | 117 place photos + 14 cars |
+| Size | 21 photos | 116 place photos + 14 cars |
 | Layout | One flat gallery, best first, no categories | One gallery, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -137,7 +137,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 9, Brussels 4, Istanbul 19, Ankara 9,
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 19, Ankara 9,
 Cappadocia 12, Antalya 8, Izmir 1, Cars 14.
 
 **Order.** Each city's best and most representative photo comes first. The "All"
@@ -151,6 +151,7 @@ Brugge, Antwerp, cars 6-14, Istanbul, Ankara, Cappadocia, Antalya, Izmir. Add a 
 - Antwerp: `chinatown-gate-tram` leads, followed by the central station frames.
 - Brussels: `equestrian-statue-blue` leads. He deleted the two Grand Place photos, so don't re-add Grand Place shots.
 - Bruges: the beer-sign gable was removed.
+- Leuven: the abbey beer bottles photo was removed.
 
 **Cars are a special case:**
 
