@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 20 photos | 117 place photos + 11 cars |
+| Size | 20 photos | 117 place photos + 13 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -144,7 +144,7 @@ architecture, local colour. Prefer sharp, well-composed frames that represent th
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
 **Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 20, Ankara 9,
-Cappadocia 12, Antalya 8, Izmir 1, Cars 11.
+Cappadocia 12, Antalya 8, Izmir 1, Cars 13.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
 load, because Mert didn't like any hand-picked arrangement. The order of `<figure>`
@@ -170,7 +170,9 @@ reintroduce a fixed order unless he asks.
 - Cars appear only under the separate Cars button. They're excluded from "All" and
   from every city filter. `app.js` handles this from the tag.
 - The `.citytag` label shows the real city where the car was shot, such as `Brugge`.
-  Don't guess it. Ask Mert if you don't know.
+  Don't guess it. Ask Mert if you don't know. Two Japan showroom cars are tagged
+  `Japan` because only the country is known. Cars never go on the map, so a car from a
+  new country needs no map change.
 
 **City pills generate automatically** from `data-city` values, so a new city needs no
 filter code. **But a new city must be added to the map** (see below).
