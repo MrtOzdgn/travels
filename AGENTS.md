@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 21 photos | 116 place photos + 14 cars |
+| Size | 22 photos | 116 place photos + 14 cars |
 | Layout | One flat gallery in random order, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -107,6 +107,7 @@ reintroduce a fixed order unless he asks.
 05 boat-silhouette-bw               12 stormy-beach-mountains    19 golden-sunset-rocks
 06 pipe-smoking-cyclist-bruges      13 cappadocia-blue-rock      20 ginger-cat-istanbul
 07 abbey-doorway-canon-bw           14 bluehour-highway-skyline  21 accordion-player-ghent
+                                                                 22 graffiti-alley-radial-drag-ghent
 ```
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
