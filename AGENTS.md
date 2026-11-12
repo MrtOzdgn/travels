@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 20 photos | 116 place photos + 13 cars |
+| Size | 20 photos | 115 place photos + 13 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -143,7 +143,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 19, Ankara 9,
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 18, Ankara 9,
 Cappadocia 12, Antalya 8, Izmir 1, Cars 13.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
@@ -160,7 +160,8 @@ reintroduce a fixed order unless he asks.
 - Istanbul: the corn and chestnut cart was replaced by a close-up of a chestnut
   vendor's tongs (`03-chestnut-vendor-tongs`). Its EXIF is unknown (it came as a
   screenshot), so its card has no settings line until Mert supplies the original.
-- Istanbul: the ferry under the Galata Bridge with the New Mosque behind was removed.
+- Istanbul: the ferry under the Galata Bridge with the New Mosque behind, and the dark
+  stairwell, were removed.
 - Cars: no taxis. Two Istanbul taxis were removed; the third (looking through a taxi
   window toward Serasker Caddesi) moved to Istanbul as a place photo.
 
