@@ -186,6 +186,13 @@ beside it (Mert didn't want Cars among the city pills). **Map is the landing vie
   close); click a photo for the shared lightbox, which then steps through that city
   only. Mert compared three deck styles and chose this panel; don't switch styles
   unless he asks.
+- **Look:** the "atlas" style (Mert chose it over clean, watercolour, engraved and
+  nautical): paper grain, sage sea, dashed borders, coast shading, lat/long grid,
+  italic sea names, neighbouring country names when zoomed in, compass and scale bar.
+  Of the extras he kept only **paper tags** (`t-tags`) and **tinted borders**
+  (`t-tint`); he turned down ink city marks, a double border, a title panel, a journey
+  line and a paper city panel. Drag to pan, scroll/pinch to zoom; the corner-brackets
+  button returns to the whole map.
 - Links: `#map/belgium`, `#map/turkey/istanbul`. A plain URL is the Europe view. A
   photo link (`#ghent/...`) opens the Grid view behind the photo.
 - Cars are not on the map. The Cars button switches to the grid with the Cars filter.

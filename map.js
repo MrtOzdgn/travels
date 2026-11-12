@@ -57,7 +57,7 @@ window.TravelsMap = (function () {
   const loadingEl = document.getElementById("mapLoading");
 
   let ready = null; // promise once the map is built
-  let features, projection, path, svg, gLand, zoom;
+  let features, landShape, projection, path, svg, gLand, gCountries, zoom;
   let transform = null;
   let focus = null; // country key
   let openCity = null;
@@ -81,13 +81,20 @@ window.TravelsMap = (function () {
       for (const src of LIBS) await loadScript(src);
       const world = await fetch(WORLD).then((r) => r.json());
       features = topojson.feature(world, world.objects.countries).features;
+      landShape = topojson.feature(world, world.objects.land);
     } catch (e) {
       loadingEl.textContent = "The map couldn't load. Try the Grid view.";
       throw e;
     }
 
     svg = d3.select(svgEl);
+    svg.append("defs");
     gLand = svg.append("g").attr("class", "land-layer");
+    // Bottom to top: lat/long grid, "water lines" echoing the coast, countries, coastline.
+    gLand.append("path").attr("class", "graticule").datum(d3.geoGraticule().step([5, 5])());
+    const gWater = gLand.append("g").attr("class", "waterlines");
+    [0, 1, 2].forEach((i) => gWater.append("path").attr("class", "wl wl" + i).datum(landShape));
+    gCountries = gLand.append("g").attr("class", "countries");
     // Drag to pan, scroll / pinch to zoom. Double-click is left to the countries.
     zoom = d3.zoom()
       .scaleExtent([0.8, 80])
@@ -108,13 +115,27 @@ window.TravelsMap = (function () {
     frame.querySelector(".map-zoom-out").addEventListener("click", () => svg.transition().duration(350).call(zoom.scaleBy, 1 / 1.7));
     frame.querySelector(".map-home").addEventListener("click", () => showEurope());
 
-    gLand.selectAll("path")
+    gCountries.selectAll("path")
       .data(features)
       .join("path")
       .attr("class", (d) => (countryOfId(d.id) ? "land visited" : "land"))
       .on("click", (e, d) => { const k = countryOfId(d.id); if (k && k !== focus) focusCountry(k); })
       .on("mouseenter", (e, d) => { const k = countryOfId(d.id); if (k) labelsEl.querySelector(`[data-k="${k}"]`)?.classList.add("hover"); })
       .on("mouseleave", () => labelsEl.querySelectorAll(".hover").forEach((x) => x.classList.remove("hover")));
+    gLand.append("path").attr("class", "coast").datum(landShape);
+
+    // Old hand-coloured maps: a darker band of colour just inside each visited
+    // country's border (the band is clipped to the country's own shape).
+    const defs = svg.select("defs");
+    const visited = features.filter((d) => countryOfId(d.id));
+    visited.forEach((d) => {
+      defs.append("clipPath").attr("id", "clip-" + d.id).append("path").attr("class", "clipshape").datum(d);
+    });
+    gLand.insert("g", ".coast").attr("class", "tints")
+      .selectAll("path").data(visited).join("path")
+      .attr("class", "tint").attr("clip-path", (d) => `url(#clip-${d.id})`);
+
+    buildAtlasDetails();
 
     // Country labels (Europe view)
     Object.keys(COUNTRIES).forEach((k) => {
@@ -171,13 +192,81 @@ window.TravelsMap = (function () {
     // Keep at least part of the map in view while panning.
     zoom.translateExtent([[-W * 0.6, -H * 0.6], [W * 1.6, H * 1.6]]);
     gLand.selectAll("path").attr("d", path);
+    svg.selectAll(".clipshape").attr("d", path);
     if (!focus) svg.call(zoom.transform, d3.zoomIdentity);
     placeOverlays();
+  }
+
+  // ----- Atlas details: sea names, neighbouring country names, compass, scale -----
+  const SEAS = [
+    ["North Sea", [3.2, 55.4]], ["Mediterranean Sea", [24.5, 34.3]],
+    ["Ionian Sea", [18.6, 37.6]], ["Ligurian Sea", [8.6, 43.4]],
+    ["Black Sea", [34.6, 43.5]], ["Aegean Sea", [25, 38.9]], ["Baltic Sea", [19.6, 56.4]],
+    ["Adriatic Sea", [15.4, 43.1]], ["Tyrrhenian Sea", [11.8, 39.8]],
+  ];
+  const NAMES = [
+    ["France", [2.6, 46.8]], ["Germany", [10.3, 51.2]], ["Netherlands", [5.7, 52.35]],
+    ["United Kingdom", [-1.9, 52.6]], ["Italy", [12.4, 43.2]], ["Spain", [-3.6, 40.2]],
+    ["Switzerland", [8.2, 46.8]], ["Austria", [14.4, 47.6]], ["Czechia", [15.4, 49.8]],
+    ["Poland", [19.3, 52.1]], ["Hungary", [19.4, 47.2]], ["Romania", [25, 45.9]],
+    ["Serbia", [20.8, 44]], ["Bulgaria", [25.3, 42.7]], ["Greece", [22.2, 39.5]],
+    ["Ukraine", [31.2, 49]], ["Georgia", [43.6, 42.2]], ["Armenia", [44.9, 40.25]],
+    ["Syria", [38.5, 35]], ["Iraq", [43.3, 33.6]], ["Cyprus", [33.1, 35.05]],
+    ["Luxembourg", [6.1, 49.75]],
+  ];
+  let atlasEl, scaleEl;
+  function buildAtlasDetails() {
+    atlasEl = document.getElementById("mapAtlas");
+    if (!atlasEl) return;
+    SEAS.forEach(([n, at]) => {
+      const el = document.createElement("span");
+      el.className = "sea-name"; el.textContent = n; el._at = at;
+      atlasEl.appendChild(el);
+    });
+    NAMES.forEach(([n, at]) => {
+      const el = document.createElement("span");
+      el.className = "land-name"; el.textContent = n; el._at = at;
+      atlasEl.appendChild(el);
+    });
+    const compass = document.createElement("div");
+    compass.className = "compass";
+    compass.innerHTML = `<svg viewBox="-50 -50 100 100" aria-hidden="true">
+      <circle r="30" class="c-ring"/><circle r="26" class="c-ring thin"/>
+      <path d="M0-44 L6-6 L0 0 L-6-6Z" class="c-dark"/><path d="M0-44 L-6-6 L0 0Z" class="c-light"/>
+      <path d="M0 44 L6 6 L0 0 L-6 6Z" class="c-light"/><path d="M44 0 L6 6 L0 0 L6-6Z" class="c-light"/>
+      <path d="M-44 0 L-6-6 L0 0 L-6 6Z" class="c-light"/>
+      <text y="-46" class="c-n">N</text></svg>`;
+    atlasEl.appendChild(compass);
+    scaleEl = document.createElement("div");
+    scaleEl.className = "scale-bar";
+    scaleEl.innerHTML = `<div class="sb-bar"><i></i><i></i></div><span class="sb-label"></span>`;
+    atlasEl.appendChild(scaleEl);
+  }
+
+  function placeAtlas(t) {
+    if (!atlasEl) return;
+    atlasEl.querySelectorAll(".sea-name, .land-name").forEach((el) => {
+      const p = projection(el._at);
+      el.style.transform = `translate(${t.applyX(p[0])}px, ${t.applyY(p[1])}px)`;
+    });
+    atlasEl.classList.toggle("show-names", t.k >= 1.8);
+    // Scale bar: a round distance that's 60-140px long at the current zoom.
+    const W = frame.clientWidth, H = frame.clientHeight;
+    const c = projection.invert([(W / 2 - t.x) / t.k, (H / 2 - t.y) / t.k]);
+    if (!c) return;
+    const a = projection(c), b = projection([c[0] + 1, c[1]]);
+    const pxPerDeg = Math.hypot(b[0] - a[0], b[1] - a[1]) * t.k;
+    const kmPerPx = (111.32 * Math.cos((c[1] * Math.PI) / 180)) / pxPerDeg;
+    const nice = [10, 20, 50, 100, 200, 300, 500, 1000];
+    const km = nice.find((n) => n / kmPerPx >= 60) || 1000;
+    scaleEl.querySelector(".sb-bar").style.width = Math.round(km / kmPerPx) + "px";
+    scaleEl.querySelector(".sb-label").textContent = km + " km";
   }
 
   function placeOverlays() {
     if (!projection) return;
     const t = transform || d3.zoomIdentity;
+    placeAtlas(t);
     labelsEl.querySelectorAll(".country-label").forEach((el) => {
       const f = features.find((x) => x.id === COUNTRIES[el.dataset.k].id);
       const [x, y] = path.centroid(f);
@@ -254,7 +343,7 @@ window.TravelsMap = (function () {
     closeDeck(true);
     focus = k;
     frame.classList.add("focused");
-    gLand.selectAll("path").classed("in-focus", (d) => d.id === COUNTRIES[k].id);
+    gCountries.selectAll("path").classed("in-focus", (d) => d.id === COUNTRIES[k].id);
     pinsEl.querySelectorAll(".pin").forEach((p, i) => {
       const on = p.dataset.k === k;
       p.classList.toggle("show", on);
@@ -269,7 +358,7 @@ window.TravelsMap = (function () {
     closeDeck(true);
     focus = null;
     frame.classList.remove("focused");
-    gLand.selectAll("path").classed("in-focus", false);
+    gCountries.selectAll("path").classed("in-focus", false);
     pinsEl.querySelectorAll(".pin").forEach((p) => { p.classList.remove("show"); p.style.transitionDelay = "0s"; });
     svg.transition().duration(900).ease(d3.easeCubicInOut).call(zoom.transform, d3.zoomIdentity);
     crumbs();

@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261112e" />
-  <link rel="stylesheet" href="lightbox.css?v=20261112e" />
-  <link rel="stylesheet" href="map.css?v=20261112e" />
+  <link rel="stylesheet" href="styles.css?v=20261112f" />
+  <link rel="stylesheet" href="lightbox.css?v=20261112f" />
+  <link rel="stylesheet" href="map.css?v=20261112f" />
 </head>
 <body class="is-map">
 
@@ -51,8 +51,9 @@
 
     <!-- ===== Map view ===== -->
     <section class="map-view" id="mapView">
-      <div class="map-frame" id="mapFrame">
+      <div class="map-frame t-tags t-tint" id="mapFrame" data-style="atlas">
         <svg class="map-svg" id="mapSvg"></svg>
+        <div class="map-atlas" id="mapAtlas" aria-hidden="true"></div>
         <div class="map-labels" id="mapLabels"></div>
         <div class="map-pins" id="mapPins"></div>
         <nav class="map-crumbs" id="mapCrumbs" aria-label="Map location"></nav>
@@ -60,7 +61,7 @@
         <div class="map-controls">
           <button class="map-zoom-in" aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
           <button class="map-zoom-out" aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
-          <button class="map-home" aria-label="Back to the starting view" title="Back to start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
+          <button class="map-home" aria-label="Show the whole map" title="Show the whole map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
         </div>
         <div class="map-loading" id="mapLoading">Loading map…</div>
       </div>
@@ -271,9 +272,9 @@
     <div class="lb-caption lb-chrome" aria-live="polite"></div>
   </div>
 
-  <script src="gallery.js?v=20261112e"></script>
-  <script src="lightbox.js?v=20261112e"></script>
-  <script src="app.js?v=20261112e"></script>
-  <script src="map.js?v=20261112e"></script>
+  <script src="gallery.js?v=20261112f"></script>
+  <script src="lightbox.js?v=20261112f"></script>
+  <script src="app.js?v=20261112f"></script>
+  <script src="map.js?v=20261112f"></script>
 </body>
 </html>
