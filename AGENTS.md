@@ -218,6 +218,10 @@ beside it (Mert didn't want Cars among the city pills). The button is labelled
   with a neighbour, a side in `LABEL_SIDE`. **Adding a country:** add it to
   `COUNTRIES` with its ISO 3166 numeric id (Belgium `056`, Türkiye `792`). Then check
   the map at phone width (375px) for overlapping or clipped labels.
+- **Performance (Nov 2026):** Mert wants smoother animations without any change in
+  look. The map only draws shapes inside the pannable area (`clipExtent`), batches
+  redraws to one per frame, and caches label and pin positions. Keep it that way; never
+  trade the look for speed without asking.
 - The map loads D3 7.8.5 and topojson-client 3.1.0 from cdnjs/jsDelivr, and Natural
   Earth 50m country shapes from `world-atlas@2.0.2` on jsDelivr, only when the map is
   shown.

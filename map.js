@@ -89,6 +89,15 @@ window.TravelsMap = (function () {
     if (!e.target.closest(".deck")) e.preventDefault();
   }, { passive: false });
 
+  let drawQueued = false;
+  function drawZoom() {
+    drawQueued = false;
+    gLand.attr("transform", transform);
+    // Zoomed in by hand: show every city pin, hide the country badges.
+    frame.classList.toggle("near", transform.k >= 3);
+    placeOverlays();
+  }
+
   // ----- Build -----
   async function build() {
     try {
@@ -117,10 +126,9 @@ window.TravelsMap = (function () {
       .on("end", () => frame.classList.remove("dragging"))
       .on("zoom", (e) => {
         transform = e.transform;
-        gLand.attr("transform", transform);
-        // Zoomed in by hand: show every city pin, hide the country badges.
-        frame.classList.toggle("near", transform.k >= 3);
-        placeOverlays();
+        // Touch screens can send more events than the display shows frames:
+        // draw at most once per frame.
+        if (!drawQueued) { drawQueued = true; requestAnimationFrame(drawZoom); }
       });
     svg.call(zoom).on("dblclick.zoom", null);
 
@@ -202,11 +210,15 @@ window.TravelsMap = (function () {
     const box = { type: "MultiPoint", coordinates: [[-1, 35.5], [45.5, 36], [-1, 54.5], [44, 52.5], [22, 56]] };
     projection = d3.geoAzimuthalEqualArea().rotate([-22, -46]).clipAngle(90)
       .fitExtent([[24, 24], [W - 24, H - 24]], box);
+    // Only draw what can ever be panned into view (a little beyond the pan limit),
+    // so the Americas, East Asia etc. aren't redrawn on every frame.
+    projection.clipExtent([[-W * 0.6 - 80, -H * 0.6 - 80], [W * 1.6 + 80, H * 1.6 + 80]]);
     path = d3.geoPath(projection);
     // Keep at least part of the map in view while panning.
     zoom.translateExtent([[-W * 0.6, -H * 0.6], [W * 1.6, H * 1.6]]);
     gLand.selectAll("path").attr("d", path);
     svg.selectAll(".clipshape").attr("d", path);
+    cachePositions();
     if (!focus) svg.call(zoom.transform, d3.zoomIdentity);
     placeOverlays();
   }
@@ -257,12 +269,25 @@ window.TravelsMap = (function () {
     atlasEl.appendChild(scaleEl);
   }
 
+  // Map positions of labels and pins only change when the projection does, so
+  // work them out once here instead of on every frame of a pan or zoom.
+  let overlayEls = [];
+  function cachePositions() {
+    overlayEls = [];
+    if (atlasEl) atlasEl.querySelectorAll(".sea-name, .land-name").forEach((el) => {
+      el._xy = projection(el._at); overlayEls.push(el);
+    });
+    labelsEl.querySelectorAll(".country-label").forEach((el) => {
+      el._xy = path.centroid(features.find((x) => x.id === COUNTRIES[el.dataset.k].id)); overlayEls.push(el);
+    });
+    pinsEl.querySelectorAll(".pin").forEach((el) => {
+      el._xy = projection(CITY_AT[el.dataset.city]); overlayEls.push(el);
+    });
+  }
+
+  let lastScale = "";
   function placeAtlas(t) {
     if (!atlasEl) return;
-    atlasEl.querySelectorAll(".sea-name, .land-name").forEach((el) => {
-      const p = projection(el._at);
-      el.style.transform = `translate(${t.applyX(p[0])}px, ${t.applyY(p[1])}px)`;
-    });
     atlasEl.classList.toggle("show-names", t.k >= 1.8);
     // Scale bar: a round distance that's 60-140px long at the current zoom.
     const W = frame.clientWidth, H = frame.clientHeight;
@@ -273,6 +298,9 @@ window.TravelsMap = (function () {
     const kmPerPx = (111.32 * Math.cos((c[1] * Math.PI) / 180)) / pxPerDeg;
     const nice = [10, 20, 50, 100, 200, 300, 500, 1000];
     const km = nice.find((n) => n / kmPerPx >= 60) || 1000;
+    const key = km + "|" + Math.round(km / kmPerPx);
+    if (key === lastScale) return;
+    lastScale = key;
     scaleEl.querySelector(".sb-bar").style.width = Math.round(km / kmPerPx) + "px";
     scaleEl.querySelector(".sb-label").textContent = km + " km";
   }
@@ -281,15 +309,9 @@ window.TravelsMap = (function () {
     if (!projection) return;
     const t = transform || d3.zoomIdentity;
     placeAtlas(t);
-    labelsEl.querySelectorAll(".country-label").forEach((el) => {
-      const f = features.find((x) => x.id === COUNTRIES[el.dataset.k].id);
-      const [x, y] = path.centroid(f);
-      el.style.transform = `translate(${t.applyX(x)}px, ${t.applyY(y)}px)`;
-    });
-    pinsEl.querySelectorAll(".pin").forEach((el) => {
-      const [x, y] = projection(CITY_AT[el.dataset.city]);
-      el.style.transform = `translate(${t.applyX(x)}px, ${t.applyY(y)}px)`;
-    });
+    for (const el of overlayEls) {
+      el.style.transform = `translate3d(${t.applyX(el._xy[0])}px, ${t.applyY(el._xy[1])}px, 0)`;
+    }
   }
 
   // ----- Navigation -----

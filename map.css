@@ -58,6 +58,7 @@
   border-radius: 10px;
   overflow: hidden;
   overflow: clip; /* hidden still lets scripts (scrollIntoView) scroll the frame; clip can't be scrolled */
+  contain: layout paint style; /* map redraws stay inside the frame */
   background: #e7e3d8;
   box-shadow: inset 0 0 0 1px var(--line), 0 8px 26px rgba(60,50,30,.08);
 }
@@ -406,3 +407,7 @@
 }
 [data-style="atlas"].t-tags .map-cities button { font-family: "Fraunces", serif; font-weight: 600; color: #4b3c28; }
 
+
+/* Smoother panning: labels and pins only ever move, so let the GPU move them. */
+.pin, .country-label, .sea-name, .land-name { will-change: transform; }
+.map-frame::after { will-change: opacity; }
