@@ -75,6 +75,13 @@ window.TravelsMap = (function () {
     });
   }
 
+  // The frame must never scroll: if anything (e.g. the lightbox bringing a panel
+  // photo into view) nudges it, snap it back so the map, buttons and breadcrumb
+  // stay where they belong. (Backup for browsers without overflow: clip.)
+  frame.addEventListener("scroll", () => {
+    if (frame.scrollTop || frame.scrollLeft) { frame.scrollTop = 0; frame.scrollLeft = 0; }
+  });
+
   // ----- Build -----
   async function build() {
     try {

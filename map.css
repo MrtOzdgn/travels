@@ -57,6 +57,7 @@
   min-height: 440px;
   border-radius: 10px;
   overflow: hidden;
+  overflow: clip; /* hidden still lets scripts (scrollIntoView) scroll the frame; clip can't be scrolled */
   background: #e7e3d8;
   box-shadow: inset 0 0 0 1px var(--line), 0 8px 26px rgba(60,50,30,.08);
 }
