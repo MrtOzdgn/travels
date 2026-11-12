@@ -109,16 +109,13 @@ img { display: block; max-width: 100%; }
 .gal-row { display: flex; align-items: stretch; gap: var(--gap); }
 .gal-row .print { flex: 0 0 auto; min-width: 0; }
 
-@media (hover: hover) {
-  .masonry:has(.print:hover) .print:not(:hover) { opacity: .8; }
-}
 
 .print {
   background: var(--card);
   padding: 12px 12px 0;
   border-radius: 6px;
   box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 22px rgba(60,50,30,.10);
-  transition: transform .25s ease, box-shadow .25s ease, opacity .35s ease;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 .print[hidden] { display: none; }
 .print:hover {

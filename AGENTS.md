@@ -287,6 +287,8 @@ stay identical in both repos (check with `cmp`):
   (target heights: 420px wide screens, 360px up to 1300px, 300px up to 900px; phones
   get one photo per row). Mert rejected column masonry (Nov 2026) because the columns
   ended at different heights. Don't go back to columns.
+- Hovering a photo lifts it with a shadow. **Never dim or fade the other photos on
+  hover**: Mert removed that (Nov 2026) because it washes out the scenes.
 - `lightbox.js` + `lightbox.css` are the photo viewer: it grows out of the clicked photo
   and shrinks back on close; swipe or arrows step through, swipe down closes; click or
   double-tap zooms to full size, drag to pan, pinch zooms; a counter and the EXIF/city
