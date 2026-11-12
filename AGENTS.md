@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 114 place photos + 13 cars |
+| Size | 19 photos | 112 place photos + 13 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -144,8 +144,8 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 18, Ankara 8,
-Cappadocia 12, Antalya 8, Izmir 1, Cars 13.
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 18, Ankara 7,
+Cappadocia 12, Antalya 7, Izmir 1, Cars 13.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
 load, because Mert didn't like any hand-picked arrangement. The order of `<figure>`
@@ -163,6 +163,8 @@ reintroduce a fixed order unless he asks.
   screenshot), so its card has no settings line until Mert supplies the original.
 - Istanbul: the ferry under the Galata Bridge with the New Mosque behind, and the dark
   stairwell, were removed.
+- Ankara: the Anıtkabir flag over the skyline was removed (not well executed).
+- Antalya: the marble statue among the ruins was removed.
 - Cars: no taxis. Two Istanbul taxis were removed; the third (looking through a taxi
   window toward Serasker Caddesi) moved to Istanbul as a place photo.
 
