@@ -295,14 +295,11 @@ After pushing, also confirm:
 
 Don't fix these without Mert's OK:
 
-1. **Broken link on Travels:** the `Portfolio ↗` link in `index.html` still points to
-   the old `mertozdogan.github.io-` address, which returns 404. It should be
-   `https://mrtozdgn.github.io/portfolio/`.
-2. **Broken link preview on the main portfolio:** `og:image` points to
+1. **Broken link preview on the main portfolio:** `og:image` points to
    `images/large/01-ginger-cat-istanbul.jpg`, which no longer exists. The file is now
    `18-ginger-cat-istanbul.jpg`. Open Graph images also generally need an absolute URL.
-3. **GIF dimensions:** `14-tower-lamppost-animation.gif` declares its thumbnail size
+2. **GIF dimensions:** `14-tower-lamppost-animation.gif` declares its thumbnail size
    (600x900) rather than its large size (1067x1600). The ratio is the same, so it
    displays correctly.
-4. **Stale README sections:** the main `README.md` still describes the old sectioned
+3. **Stale README sections:** the main `README.md` still describes the old sectioned
    gallery and `<figure class="shot">`. Trust this file over that README.
