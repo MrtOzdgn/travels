@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 20 photos | 115 place photos + 13 cars |
+| Size | 19 photos | 114 place photos + 13 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -100,17 +100,18 @@ reintroduce a fixed order unless he asks.
 **Rank list:**
 
 ```
-01 man-on-bench-bw                  08 night-motorcyclist        15 cappadocia-valley-road
-02 smoking-fisherman-galata-bridge  09 highway-sunset-overpass   16 fishermen-galata-bridge
-03 tuxedo-man-crowd-bruges-bw       10 stormy-beach-mountains    17 golden-sunset-rocks
-04 boat-silhouette-bw               11 cappadocia-blue-rock      18 ginger-cat-istanbul
-05 pipe-smoking-cyclist-bruges      12 bluehour-highway-skyline  19 accordion-player-ghent
-06 abbey-doorway-canon-bw           13 grey-racehorse-hood       20 graffiti-alley-radial-drag-ghent
-07 hand-reaching-horse-bridle-bw    14 cappadocia-ridge-hiker
+01 man-on-bench-bw                  08 night-motorcyclist        15 fishermen-galata-bridge
+02 smoking-fisherman-galata-bridge  09 highway-sunset-overpass   16 golden-sunset-rocks
+03 tuxedo-man-crowd-bruges-bw       10 stormy-beach-mountains    17 ginger-cat-istanbul
+04 boat-silhouette-bw               11 cappadocia-blue-rock      18 accordion-player-ghent
+05 pipe-smoking-cyclist-bruges      12 bluehour-highway-skyline  19 graffiti-alley-radial-drag-ghent
+06 abbey-doorway-canon-bw           13 cappadocia-ridge-hiker
+07 hand-reaching-horse-bridle-bw    14 cappadocia-valley-road
 ```
 
 Removed from main in Nov 2026 at Mert's request (don't re-add): the Anıtkabir honour
-guards (still on Travels, Ankara) and the racehorse with the red jockey.
+guards (still on Travels, Ankara), the racehorse with the red jockey, and the grey
+racehorse in the red-and-yellow hood (also removed from Travels, Ankara).
 
 **Benchmarks.** The strongest frames are the man on the bench, the pipe-smoking
 cyclist, the accordion player and the smoking fisherman: each has one clear human anchor you can read at a
@@ -143,7 +144,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 18, Ankara 9,
+**Current counts:** Ghent 23, Brugge 18, Antwerp 14, Leuven 8, Brussels 4, Istanbul 18, Ankara 8,
 Cappadocia 12, Antalya 8, Izmir 1, Cars 13.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
@@ -358,7 +359,7 @@ Don't fix these without Mert's OK:
 
 1. **Broken link preview on the main portfolio:** `og:image` points to
    `images/large/01-ginger-cat-istanbul.jpg`, which no longer exists. The file is now
-   `18-ginger-cat-istanbul.jpg`. Open Graph images also generally need an absolute URL.
+   `17-ginger-cat-istanbul.jpg`. Open Graph images also generally need an absolute URL.
 2. **GIF dimensions:** `14-tower-lamppost-animation.gif` declares its thumbnail size
    (600x900) rather than its large size (1067x1600). The ratio is the same, so it
    displays correctly.
