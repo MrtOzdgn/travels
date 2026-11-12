@@ -15,7 +15,7 @@ or in a commit message (see rule 2).
 | Live | https://mrtozdgn.github.io/portfolio/ | https://mrtozdgn.github.io/travels/ |
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
-| Size | 19 photos | 111 place photos + 13 cars |
+| Size | 19 photos | 110 place photos + 13 cars |
 | Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
@@ -144,7 +144,7 @@ art photo that happens to have been shot there. Landmarks, streets, canals,
 architecture, local colour. Prefer sharp, well-composed frames that represent the
 city well over adequate snapshots. Candid strangers are fine, personal photos are not.
 
-**Current counts:** Ghent 23, Brugge 18, Antwerp 13, Leuven 8, Brussels 4, Istanbul 18, Ankara 7,
+**Current counts:** Ghent 23, Brugge 18, Antwerp 13, Leuven 7, Brussels 4, Istanbul 18, Ankara 7,
 Cappadocia 12, Antalya 7, Izmir 1, Cars 13.
 
 **Order.** Random. Since November 2026 `app.js` shuffles all photos on every page
@@ -157,7 +157,7 @@ reintroduce a fixed order unless he asks.
 
 - Brussels: he deleted the two Grand Place photos, so don't re-add Grand Place shots.
 - Bruges: the beer-sign gable was removed.
-- Leuven: the abbey beer bottles photo was removed.
+- Leuven: the abbey beer bottles photo and the stone lion-with-shield statue were removed.
 - Istanbul: the corn and chestnut cart was replaced by a close-up of a chestnut
   vendor's tongs (`03-chestnut-vendor-tongs`). Its EXIF is unknown (it came as a
   screenshot), so its card has no settings line until Mert supplies the original.

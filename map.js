@@ -24,7 +24,7 @@ window.TravelsMap = (function () {
     ghent: "02-belfry-rooftop-panorama",
     brugge: "01-rozenhoedkaai-canal-flowers",
     antwerp: "02-antwerpen-centraal-facade",
-    leuven: "06-university-library-tower",
+    leuven: "04-university-library-tower",
     brussels: "03-manneken-pis",
     istanbul: "12-galata-bridge-new-mosque",
     ankara: "05-highway-sunset-overpass",
