@@ -16,7 +16,7 @@ or in a commit message (see rule 2).
 | Purpose | Flagship. Mert gets jobs from this page. | A visual record of places he has been. |
 | Bar | Ruthless. Most photos fail. | Moderate. Good, sharp, shows the place. |
 | Size | 20 photos | 116 place photos + 14 cars |
-| Layout | One flat gallery in random order, no categories | One gallery in random order, filtered by city, plus a separate Cars button |
+| Layout | One flat gallery in random order, no categories | Map view (landing) + Grid view filtered by city, plus a Cars button |
 
 Both are plain static HTML/CSS/JS on GitHub Pages, deployed from `main` at the repo
 root. There is no build step: a push to `main` is a publish, usually live within a
@@ -168,7 +168,28 @@ reintroduce a fixed order unless he asks.
   Don't guess it. Ask Mert if you don't know.
 
 **City pills generate automatically** from `data-city` values, so a new city needs no
-filter code.
+filter code. **But a new city must be added to the map** (see below).
+
+**Views (Nov 2026).** The top bar has a **Grid | Map** switch with the **Cars** button
+beside it (Mert didn't want Cars among the city pills). **Map is the landing view.**
+
+- `map.js` + `map.css` (Travels only): a Europe map; Belgium and Türkiye are
+  highlighted. Click a country to zoom in and see city pins with photo counts; click a
+  city to open a side panel of its photos (a bottom sheet on phones, swipe down to
+  close); click a photo for the shared lightbox, which then steps through that city
+  only. Mert compared three deck styles and chose this panel; don't switch styles
+  unless he asks.
+- Links: `#map/belgium`, `#map/turkey/istanbul`. A plain URL is the Europe view. A
+  photo link (`#ghent/...`) opens the Grid view behind the photo.
+- Cars are not on the map. The Cars button switches to the grid with the Cars filter.
+- **Adding a city:** add its key (the `data-city` value) to its country's `cities` in
+  `COUNTRIES`, its `[longitude, latitude]` to `CITY_AT`, and, if its label collides
+  with a neighbour, a side in `LABEL_SIDE`. **Adding a country:** add it to
+  `COUNTRIES` with its ISO 3166 numeric id (Belgium `056`, Türkiye `792`). Then check
+  the map at phone width (375px) for overlapping or clipped labels.
+- The map loads D3 7.8.5 and topojson-client 3.1.0 from cdnjs/jsDelivr, and Natural
+  Earth 50m country shapes from `world-atlas@2.0.2` on jsDelivr, only when the map is
+  shown.
 
 ## 7. The review routine
 
@@ -297,8 +318,8 @@ After pushing, also confirm:
 
 - The live page shows the new photo and the expected count.
 - `git status` is clean, and only the files you meant to change were committed.
-- Both galleries are random per load and read left to right. On Travels the Cars
-  and city filters still behave as section 6 describes.
+- Both galleries are random per load and read left to right. On Travels the map
+  opens first, and the Cars button and city filters behave as section 6 describes.
 - If a page looks out of date, it may be browser cache. Hard-refresh before debugging.
 
 ## 10. How Mert works

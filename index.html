@@ -13,10 +13,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261112b" />
-  <link rel="stylesheet" href="lightbox.css?v=20261112b" />
+  <link rel="stylesheet" href="styles.css?v=20261112c" />
+  <link rel="stylesheet" href="lightbox.css?v=20261112c" />
+  <link rel="stylesheet" href="map.css?v=20261112c" />
 </head>
-<body>
+<body class="is-map">
 
   <!-- ===== Header ===== -->
   <header class="site-header" id="top">
@@ -28,19 +29,40 @@
 
   <main>
 
-    <!-- ===== Category filter (cars, separate from place) ===== -->
-    <div class="filter-bar filter-bar-cars" id="filterBarCars">
-      <!-- pill generated automatically if any data-city="cars" figures are found on the page -->
+    <!-- ===== View bar: Grid / Map toggle, with Cars beside it ===== -->
+    <div class="view-bar">
+      <div class="view-toggle" role="tablist" aria-label="View">
+        <button class="view-btn" data-view="grid" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+          Grid
+        </button>
+        <button class="view-btn active" data-view="map" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M9 4L3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4z"/><path d="M9 4v14M15 6v14"/></svg>
+          Map
+        </button>
+      </div>
+      <div class="cars-slot" id="filterBarCars"></div>
     </div>
 
-    <!-- ===== City filter ===== -->
-    <div class="filter-bar" id="filterBar">
+    <!-- ===== City filter (grid view only) ===== -->
+    <div class="filter-bar" id="filterBar" hidden>
       <button class="filter-pill active" data-filter="all">All</button>
-      <!-- more pills are generated automatically from data-city values found on the page (excluding "cars") -->
     </div>
+
+    <!-- ===== Map view ===== -->
+    <section class="map-view" id="mapView">
+      <div class="map-frame" id="mapFrame">
+        <svg class="map-svg" id="mapSvg"></svg>
+        <div class="map-labels" id="mapLabels"></div>
+        <div class="map-pins" id="mapPins"></div>
+        <nav class="map-crumbs" id="mapCrumbs" aria-label="Map location"></nav>
+        <div class="map-cities" id="mapCities"></div>
+        <div class="map-loading" id="mapLoading">Loading map…</div>
+      </div>
+    </section>
 
     <!-- ===== Gallery (one flat set, filterable by city) ===== -->
-    <section class="gallery-section" id="work">
+    <section class="gallery-section" id="work" hidden>
       <div class="masonry" id="masonry">
         <figure class="print" data-city="ghent"><img class="shot" src="images/ghent/thumbs/01-graslei-canal-boats.jpg" data-full="images/ghent/large/01-graslei-canal-boats.jpg" width="2200" height="1467" loading="lazy" alt="Tour boats on the Graslei canal, Ghent's historic waterfront guildhalls behind" /><div class="meta"><span class="citytag">Ghent</span><span class="exif">ƒ/5.6 &nbsp;·&nbsp; 1/1000 &nbsp;·&nbsp; ISO 100 &nbsp;·&nbsp; 36mm</span></div></figure>
         
@@ -244,8 +266,9 @@
     <div class="lb-caption lb-chrome" aria-live="polite"></div>
   </div>
 
-  <script src="gallery.js?v=20261112b"></script>
-  <script src="lightbox.js?v=20261112b"></script>
-  <script src="app.js?v=20261112b"></script>
+  <script src="gallery.js?v=20261112c"></script>
+  <script src="lightbox.js?v=20261112c"></script>
+  <script src="app.js?v=20261112c"></script>
+  <script src="map.js?v=20261112c"></script>
 </body>
 </html>

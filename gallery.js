@@ -5,6 +5,9 @@
 // row. Every photo in a row gets the same height, and each row is scaled so it
 // fills the width exactly — no ragged column ends. The last row keeps the
 // target height and sits left-aligned instead of being stretched.
+//
+// opts.target: row height to aim for (0 = one photo per row); opts.pad: total
+// horizontal padding of one card, if it differs from the default 24px.
 window.Gallery = (function () {
   const CARD_PAD = 24; // .print has 12px padding on each side
 
@@ -22,14 +25,15 @@ window.Gallery = (function () {
     return w / h;
   }
 
-  function layout(container, figures) {
+  function layout(container, figures, opts = {}) {
     const visible = figures.filter((f) => !f.hidden);
     const gap = parseFloat(getComputedStyle(container).rowGap) || 26;
     const W = container.clientWidth - 0.5; // sub-pixel safety so rows never overflow
-    const target = targetHeight(window.innerWidth);
+    const target = opts.target != null ? opts.target : targetHeight(window.innerWidth);
 
     // Height a row would need to fill the width exactly.
-    const fitHeight = (n, sumAr) => (W - n * CARD_PAD - (n - 1) * gap) / sumAr;
+    const pad = opts.pad != null ? opts.pad : CARD_PAD;
+    const fitHeight = (n, sumAr) => (W - n * pad - (n - 1) * gap) / sumAr;
 
     const rows = [];
     let row = [], sumAr = 0;
@@ -58,7 +62,7 @@ window.Gallery = (function () {
       const el = document.createElement("div");
       el.className = "gal-row";
       figs.forEach((f) => {
-        f.style.width = h * ratio(f) + CARD_PAD + "px";
+        f.style.width = h * ratio(f) + pad + "px";
         el.appendChild(f);
       });
       return el;

@@ -61,7 +61,7 @@ img { display: block; max-width: 100%; }
 }
 .nav a:hover { background: #efe8d8; color: var(--ink); }
 
-/* ===== Filter bars: category (cars) above, then place (city) ===== */
+/* ===== City filter bar (grid view; the Cars pill lives in the view bar, see map.css) ===== */
 .filter-bar {
   max-width: var(--max);
   margin: 0 auto;
@@ -70,13 +70,7 @@ img { display: block; max-width: 100%; }
   flex-wrap: wrap;
   gap: 10px;
 }
-.filter-bar-cars:not([hidden]) + .filter-bar { padding-top: 16px; }
-.filter-bar-cars:not([hidden]) {
-  padding-bottom: 16px;
-  margin-bottom: 0;
-  border-bottom: 1px solid var(--line);
-}
-.filter-bar-cars .filter-pill { border-color: var(--accent); }
+.cars-pill { border-color: var(--accent); }
 .filter-pill {
   font-family: "Nunito", sans-serif;
   color: #6d6559;
